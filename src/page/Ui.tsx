@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchFootballData, selectMappedList } from "../redux/football";
 import "../components/table.css";
@@ -10,26 +10,34 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
   useDisclosure,
-  Text,
+  Button,
 } from "@chakra-ui/react";
-import { openModal } from "../redux/modal/modalSlice";
-const Ui = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const data5 = useSelector(selectMappedList);
-  const dispatch = useDispatch();
 
+const Ui = () => {
+  const [newData, setNewData] = useState({} as any);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const reformedData: any = useSelector(selectMappedList);
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFootballData());
   }, []);
-
   const handleTeam = (data: any) => {
-    dispatch(openModal(data));
-    dispatch(fetchFootballData());
+    console.log(data);
+    onOpen();
+    setNewData(data);
   };
+
+  // const handleTeam1 = (idx: any) => {
+  //   onOpen();
+  //   let data = reformedData[idx];
+  //   console.log(data);
+  //   setNewData(data);
+
+  // };
   return (
     <>
+      {/* <pre>{JSON.stringify(da, null, 2)}</pre> */}
       <table className="table">
         <thead className="tableRowHeader">
           <tr>
@@ -48,8 +56,13 @@ const Ui = () => {
           </tr>
         </thead>
         <tbody>
-          {data5.map((data: any, index: any) => (
-            <tr key={index} className="tableRowIems" onClick={onOpen}>
+          {reformedData.map((data: any, index: any) => (
+            <tr
+              key={index}
+              className="tableRowIems"
+              onClick={() => handleTeam(data)}
+              // onClick={() => handleTeam1(index)}
+            >
               <td className="tableCell">{index + 1}</td>
               <td className="tableCell">{data.name}</td>
               <td className="tableCell">{data.games}</td>
@@ -79,34 +92,20 @@ const Ui = () => {
                   })}
                 </div>
               </td>
-              <td className="tableCell">
-                {/* <Button onClick={onOpen}>See Details</Button> */}
-                <Modal
-                  closeOnOverlayClick={false}
-                  isOpen={isOpen}
-                  onClose={onClose}
-                >
-                  <ModalOverlay />
-                  <ModalContent>
-                    <ModalHeader>{data.name}</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody pb={6}>
-                      <Text>Position: {index + 1}</Text>
-                      <Text>Played Games: {data.games}</Text>
-                      <Text>Won: {data.wins}</Text>
-                      <Text>Draw: {data.games - data.wins - data.lose}</Text>
-                      <Text>Lost: {data.lose}</Text>
-                    </ModalBody>
+              <Modal onClose={onClose} isOpen={isOpen} isCentered>
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>{newData?.name}</ModalHeader>
+                  <ModalCloseButton />
 
-                    <ModalFooter>
-                      <Button colorScheme="blue" mr={3}>
-                        Save
-                      </Button>
-                      <Button onClick={onClose}>Cancel</Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
-              </td>
+                  <ModalBody>Games Played: {newData?.games}</ModalBody>
+                  <ModalBody>Wins: {newData?.wins}</ModalBody>
+                  <ModalBody>loose: {newData?.lose}</ModalBody>
+                  <ModalFooter>
+                    <Button onClick={onClose}>Close</Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
             </tr>
           ))}
         </tbody>

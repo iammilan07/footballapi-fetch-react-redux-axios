@@ -3,9 +3,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     footballData: [],
-    // team: [],
+    isOpen: false,
     loading: false,
-    error: null
+    error: null,
+    items: null,
 };
 
 const footballDataSlice = createSlice({
@@ -26,9 +27,8 @@ const footballDataSlice = createSlice({
             state.footballData = action.payload
 
         },
-        // fetchTeam: (state: any, action: any) => {
-        //     state.team = action.payload
-        // },
+
+
     },
 });
 

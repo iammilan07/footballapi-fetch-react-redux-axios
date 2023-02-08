@@ -7,7 +7,7 @@ import { Api } from "../../page/data/Api";
 export const fetchFootballData = (): any => async (dispatch: any) => {
     dispatch(fromSlice.request());
     const response: any = await axios.get(Api);
-    console.log(response, 'action')
+    // console.log(response, 'action')
 
     if (response) {
         const { data } = response;
