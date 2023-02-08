@@ -71,11 +71,11 @@ export const selectMappedList = (state: RootState) => {
         const gda = a.goala - a.goalc; //goaldiiferense
         const gdb = b.goala - b.goalc;
         const scorea = (a.wins * 3) + a.games - a.wins - a.lose
-        const scoreb = (b.wins * 3) + b.games - b.wins - a.lose
-        if (a.wins === b.wins) {
+        const scoreb = (b.wins * 3) + b.games - b.wins - b.lose
+        if (scoreb === scorea) {
             return gdb - gda;
         }
-        return b.wins - a.wins;
+        return scoreb - scorea;
     });
     return arrayinfo
 }

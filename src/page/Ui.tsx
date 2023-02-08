@@ -23,7 +23,6 @@ const Ui = () => {
     dispatch(fetchFootballData());
   }, []);
   const handleTeam = (data: any) => {
-    console.log(data);
     onOpen();
     setNewData(data);
   };
@@ -52,7 +51,6 @@ const Ui = () => {
             <th className="tableHeader">GD</th>
             <th className="tableHeader">Points</th>
             <th className="tableHeader">Forms</th>
-            {/* <th className="tableHeader">Details</th> */}
           </tr>
         </thead>
         <tbody>
