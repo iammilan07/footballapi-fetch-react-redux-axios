@@ -17,6 +17,13 @@ import {
   useDisclosure,
   Button,
   Spinner,
+  Table,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
+  Box,
 } from "@chakra-ui/react";
 
 const Ui = () => {
@@ -53,61 +60,61 @@ const Ui = () => {
         />
       )}
       {!loading && reformedData?.length > 0 && (
-        <table className="table">
-          <thead className="tableRowHeader">
-            <tr>
-              <th className="tableHeader">Position</th>
-              <th className="tableHeader">Club Name</th>
-              <th className="tableHeader">Played</th>
-              <th className="tableHeader">Win</th>
-              <th className="tableHeader">Draw</th>
-              <th className="tableHeader">Loss</th>
-              <th className="tableHeader">Goal Scored</th>
-              <th className="tableHeader">Goal Concede</th>
-              <th className="tableHeader">GD</th>
-              <th className="tableHeader">Points</th>
-              <th className="tableHeader">Forms</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table className="table" variant="striped" colorScheme="teal">
+          <Thead className="tableRowHeader">
+            <Tr>
+              <Th className="tableHeader">Position</Th>
+              <Th className="tableHeader">Club Name</Th>
+              <Th className="tableHeader">Played</Th>
+              <Th className="tableHeader">Win</Th>
+              <Th className="tableHeader">Draw</Th>
+              <Th className="tableHeader">Loss</Th>
+              <Th className="tableHeader">Goal Scored</Th>
+              <Th className="tableHeader">Goal Concede</Th>
+              <Th className="tableHeader">GD</Th>
+              <Th className="tableHeader">Points</Th>
+              <Th className="tableHeader">Forms</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
             {reformedData.map((data: any, index: any) => (
-              <tr
+              <Tr
                 key={index}
                 className="tableRowIems"
                 onClick={() => handleTeam(data)}
                 // onClick={() => handleTeam1(index)}
               >
-                <td className="tableCell">{index + 1}</td>
-                <td className="tableCell">{data.name}</td>
-                <td className="tableCell">{data.games}</td>
-                <td className="tableCell">{data.wins}</td>
-                <td className="tableCell">
+                <Td className="tableCell">{index + 1}</Td>
+                <Td className="tableCell">{data.name}</Td>
+                <Td className="tableCell">{data.games}</Td>
+                <Td className="tableCell">{data.wins}</Td>
+                <Td className="tableCell">
                   {data.games - data.wins - data.lose}
-                </td>
-                <td className="tableCell">{data.lose}</td>
-                <td className="tableCell">{data.goalAgainst}</td>
-                <td className="tableCell">{data.goalConcede}</td>
-                <td className="tableCell">
+                </Td>
+                <Td className="tableCell">{data.lose}</Td>
+                <Td className="tableCell">{data.goalAgainst}</Td>
+                <Td className="tableCell">{data.goalConcede}</Td>
+                <Td className="tableCell">
                   {data.goalAgainst - data.goalConcede}
-                </td>
-                <td className="tableCell">
+                </Td>
+                <Td className="tableCell">
                   {data.wins * 3 + data.games - data.wins - data.lose}
-                </td>
-                <td className="tableCell">
-                  <div style={{ display: "flex", padding: "5px" }}>
+                </Td>
+                <Td className="tableCell">
+                  <Box style={{ display: "flex", padding: "5px" }}>
                     {data.lastGames.map((item: any, index: any) => {
                       if (index < 5) {
                         if (item === "l") {
-                          return <div className="lossButton"> L</div>;
+                          return <Box className="lossButton"> L</Box>;
                         } else if (item === "d") {
-                          return <div className="drawButton"> D</div>;
+                          return <Box className="drawButton"> D</Box>;
                         } else {
-                          return <div className="winButton"> w</div>;
+                          return <Box className="winButton"> w</Box>;
                         }
                       }
                     })}
-                  </div>
-                </td>
+                  </Box>
+                </Td>
                 <Modal onClose={onClose} isOpen={isOpen} isCentered>
                   <ModalOverlay />
                   <ModalContent>
@@ -122,10 +129,10 @@ const Ui = () => {
                     </ModalFooter>
                   </ModalContent>
                 </Modal>
-              </tr>
+              </Tr>
             ))}
-          </tbody>
-        </table>
+          </Tbody>
+        </Table>
       )}
       {!loading && reformedData?.length === 0 && <p>noData</p>}
     </>

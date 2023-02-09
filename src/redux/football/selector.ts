@@ -7,6 +7,7 @@ export const selectLoading = (state: RootState) => state.footballDataList.loadin
 
 export const selectMappedList = (state: RootState) => {
     const data: any = state.footballDataList.footballData;
+    debugger
     const { matches, name } = data;
     const info: any = {};
     if (matches && matches.length > 0) {
@@ -37,6 +38,7 @@ export const selectMappedList = (state: RootState) => {
                 return;
             }
             const { ft } = score;
+
             info[team1].games++;
             info[team2].games++;
             info[team1].goalAgainst = info[team1].goalAgainst + ft[0];

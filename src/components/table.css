@@ -10,8 +10,8 @@
   }
   
   .tableHeader {
-    padding: 12px;
-    font-weight: 500;
+    padding: 10px;
+    font-weight: 600;
     text-align: left;
     font-size: 14px;
   }
@@ -28,16 +28,16 @@
     cursor: auto;
   }
   
-  .tableRowItems:nth-child(odd) {
+  /* .tableRowItems:nth-child(odd) {
     background-color: #f9f9f9;
   }
-  
+  */
   .tableCell {
     padding: 12px;
     font-size: 14px;
-    color: grey;
+   
     justify-content: center;
-  }
+  } 
   
   .winButton {
     border-radius: 50%;
