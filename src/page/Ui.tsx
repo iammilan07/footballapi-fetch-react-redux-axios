@@ -24,6 +24,7 @@ import {
   Tbody,
   Td,
   Box,
+  Center,
 } from "@chakra-ui/react";
 
 const Ui = () => {
@@ -51,16 +52,18 @@ const Ui = () => {
     <>
       {/* <pre>{JSON.stringify(reformedData, null, 2)}</pre> */}
       {loading && (
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
+        <Center>
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="xl"
+          />
+        </Center>
       )}
       {!loading && reformedData?.length > 0 && (
-        <Table className="table" variant="striped" colorScheme="teal">
+        <Table className="table" variant="striped" colorScheme="gray">
           <Thead className="tableRowHeader">
             <Tr>
               <Th className="tableHeader">Position</Th>
@@ -115,7 +118,12 @@ const Ui = () => {
                     })}
                   </Box>
                 </Td>
-                <Modal onClose={onClose} isOpen={isOpen} isCentered>
+                <Modal
+                  blockScrollOnMount={false}
+                  onClose={onClose}
+                  isOpen={isOpen}
+                  isCentered
+                >
                   <ModalOverlay />
                   <ModalContent>
                     <ModalHeader>{newData?.name}</ModalHeader>
