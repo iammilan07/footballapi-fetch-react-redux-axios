@@ -61,14 +61,15 @@ export const selectMappedList = (state: RootState) => {
         });
     }
 
-    const arrayinfo = [];
-    for (const key in info) {
+    const arrayinfo: any = [];
+    Object.entries(info).forEach(([key, value]) => {
         arrayinfo.push({
             name: key,
-            ...info[key],
-        });
-    }
-    arrayinfo.sort((a, b) => {
+            ...info[key]
+        })
+    })
+
+    arrayinfo.sort((a: any, b: any) => {
         const gda = a.goala - a.goalc; //goaldiiferense
         const gdb = b.goala - b.goalc;
         const scorea = (a.wins * 3) + a.games - a.wins - a.lose
@@ -82,4 +83,10 @@ export const selectMappedList = (state: RootState) => {
 }
 
 
-
+//Rough
+ // for (const key in info) {
+    //     arrayinfo.push({
+    //         name: key,
+    //         ...info[key],
+    //     });
+    // }
