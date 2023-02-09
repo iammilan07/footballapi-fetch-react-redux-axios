@@ -4,6 +4,7 @@ export const selectFootballList: any = (state: RootState) => state.footballDataL
 
 export const selectLoading = (state: RootState) => state.footballDataList.loading;
 
+
 export const selectMappedList = (state: RootState) => {
     const data: any = state.footballDataList.footballData;
     const { matches, name } = data;
@@ -44,23 +45,23 @@ export const selectMappedList = (state: RootState) => {
             info[team2].goalc = info[team2].goalc + ft[0];
 
             if (ft[0] === ft[1]) {
-                info[team1].lastgames = [1, ...info[team1].lastgames]; //1 = draw
-                info[team2].lastgames = [1, ...info[team2].lastgames];//0 = win, 2=lost
+                info[team1].lastgames = ["d", ...info[team1].lastgames];
+                info[team2].lastgames = ["d", ...info[team2].lastgames];
             } else if (ft[0] > ft[1]) {
                 info[team1].wins++;
                 info[team2].lose++;
-                info[team1].lastgames = [2, ...info[team1].lastgames];
-                info[team2].lastgames = [0, ...info[team2].lastgames];
+                info[team1].lastgames = ["w", ...info[team1].lastgames];
+                info[team2].lastgames = ["l", ...info[team2].lastgames];
             } else {
                 info[team2].wins++;
                 info[team1].lose++;
-                info[team1].lastgames = [0, ...info[team1].lastgames];
-                info[team2].lastgames = [2, ...info[team2].lastgames];
+                info[team1].lastgames = ["l", ...info[team1].lastgames];
+                info[team2].lastgames = ["w", ...info[team2].lastgames];
             }
         });
     }
 
-    const arrayinfo = []; //sort garna lako [] use gareako
+    const arrayinfo = [];
     for (const key in info) {
         arrayinfo.push({
             name: key,

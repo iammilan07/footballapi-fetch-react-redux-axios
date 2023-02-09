@@ -1,12 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-
 const initialState = {
     footballData: [],
-    isOpen: false,
     loading: false,
-    error: null,
-    items: null,
+
 };
 
 const footballDataSlice = createSlice({
@@ -19,7 +15,6 @@ const footballDataSlice = createSlice({
         },
         success: (state, action) => {
             state.footballData = action.payload
-            console.log('reducer', state.footballData)
             state.loading = false
         },
 
