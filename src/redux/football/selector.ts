@@ -17,10 +17,9 @@ export const selectMappedList = (state: RootState) => {
                     wins: 0,
                     lose: 0,
                     games: 0,
-                    lastgames: [],
-                    goala: 0,    //goalagainst
-                    goalc: 0,   //goalconcede
-
+                    lastGames: [],
+                    goalAgaints: 0,
+                    goalConcede: 0,
                 };
             }
             if (!info[team2]) {
@@ -28,9 +27,9 @@ export const selectMappedList = (state: RootState) => {
                     wins: 0,
                     games: 0,
                     lose: 0,
-                    lastgames: [],
-                    goala: 0,
-                    goalc: 0,
+                    lastGames: [],
+                    goalAgaints: 0,
+                    goalConcede: 0,
                 };
             }
             if (!score) {
@@ -39,24 +38,24 @@ export const selectMappedList = (state: RootState) => {
             const { ft } = score;
             info[team1].games++;
             info[team2].games++;
-            info[team1].goala = info[team1].goala + ft[0];
-            info[team2].goala = info[team2].goala + ft[1];
-            info[team1].goalc = info[team1].goalc + ft[1];
-            info[team2].goalc = info[team2].goalc + ft[0];
+            info[team1].goalAgaints = info[team1].goalAgaints + ft[0];
+            info[team2].goalAgaints = info[team2].goalAgaints + ft[1];
+            info[team1].goalConcede = info[team1].goalConcede + ft[1];
+            info[team2].goalConcede = info[team2].goalConcede + ft[0];
 
             if (ft[0] === ft[1]) {
-                info[team1].lastgames = ["d", ...info[team1].lastgames];
-                info[team2].lastgames = ["d", ...info[team2].lastgames];
+                info[team1].lastGames = ["d", ...info[team1].lastGames];
+                info[team2].lastGames = ["d", ...info[team2].lastGames];
             } else if (ft[0] > ft[1]) {
                 info[team1].wins++;
                 info[team2].lose++;
-                info[team1].lastgames = ["w", ...info[team1].lastgames];
-                info[team2].lastgames = ["l", ...info[team2].lastgames];
+                info[team1].lastGames = ["w", ...info[team1].lastGames];
+                info[team2].lastGames = ["l", ...info[team2].lastGames];
             } else {
                 info[team2].wins++;
                 info[team1].lose++;
-                info[team1].lastgames = ["l", ...info[team1].lastgames];
-                info[team2].lastgames = ["w", ...info[team2].lastgames];
+                info[team1].lastGames = ["l", ...info[team1].lastGames];
+                info[team2].lastGames = ["w", ...info[team2].lastGames];
             }
         });
     }
@@ -70,8 +69,8 @@ export const selectMappedList = (state: RootState) => {
     })
 
     arrayinfo.sort((a: any, b: any) => {
-        const gda = a.goala - a.goalc; //goaldiiferense
-        const gdb = b.goala - b.goalc;
+        const gda = a.goalAgaints - a.goalConcede; //goaldiiferense
+        const gdb = b.goalAgaints - b.goalConcede;
         const scorea = (a.wins * 3) + a.games - a.wins - a.lose
         const scoreb = (b.wins * 3) + b.games - b.wins - b.lose
         if (scoreb === scorea) {
