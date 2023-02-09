@@ -85,15 +85,17 @@ const Ui = () => {
                   {data.games - data.wins - data.lose}
                 </td>
                 <td className="tableCell">{data.lose}</td>
-                <td className="tableCell">{data.goala}</td>
-                <td className="tableCell">{data.goalc}</td>
-                <td className="tableCell">{data.goala - data.goalc}</td>
+                <td className="tableCell">{data.goalAgainst}</td>
+                <td className="tableCell">{data.goalConcede}</td>
+                <td className="tableCell">
+                  {data.goalAgainst - data.goalConcede}
+                </td>
                 <td className="tableCell">
                   {data.wins * 3 + data.games - data.wins - data.lose}
                 </td>
                 <td className="tableCell">
                   <div style={{ display: "flex", padding: "5px" }}>
-                    {data.lastgames.map((item: any, index: any) => {
+                    {data.lastGames.map((item: any, index: any) => {
                       if (index < 5) {
                         if (item === "l") {
                           return <div className="lossButton"> L</div>;

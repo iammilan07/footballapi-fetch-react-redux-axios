@@ -18,8 +18,9 @@ export const selectMappedList = (state: RootState) => {
                     lose: 0,
                     games: 0,
                     lastGames: [],
-                    goalAgaints: 0,
+                    goalAgainst: 0,
                     goalConcede: 0,
+
                 };
             }
             if (!info[team2]) {
@@ -28,7 +29,7 @@ export const selectMappedList = (state: RootState) => {
                     games: 0,
                     lose: 0,
                     lastGames: [],
-                    goalAgaints: 0,
+                    goalAgainst: 0,
                     goalConcede: 0,
                 };
             }
@@ -38,8 +39,8 @@ export const selectMappedList = (state: RootState) => {
             const { ft } = score;
             info[team1].games++;
             info[team2].games++;
-            info[team1].goalAgaints = info[team1].goalAgaints + ft[0];
-            info[team2].goalAgaints = info[team2].goalAgaints + ft[1];
+            info[team1].goalAgainst = info[team1].goalAgainst + ft[0];
+            info[team2].goalAgainst = info[team2].goalAgainst + ft[1];
             info[team1].goalConcede = info[team1].goalConcede + ft[1];
             info[team2].goalConcede = info[team2].goalConcede + ft[0];
 
@@ -69,8 +70,8 @@ export const selectMappedList = (state: RootState) => {
     })
 
     arrayinfo.sort((a: any, b: any) => {
-        const gda = a.goalAgaints - a.goalConcede; //goaldiiferense
-        const gdb = b.goalAgaints - b.goalConcede;
+        const gda = a.goalAgainst - a.goalConcede; //goaldiiferense
+        const gdb = b.goalAgainst - b.goalConcede;
         const scorea = (a.wins * 3) + a.games - a.wins - a.lose
         const scoreb = (b.wins * 3) + b.games - b.wins - b.lose
         if (scoreb === scorea) {
