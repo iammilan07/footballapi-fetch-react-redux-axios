@@ -138,22 +138,20 @@ const Ui = () => {
                     {data.wins * 3 + data.games - data.wins - data.lose}
                   </Td>
                   <Td className="tableCell">
-                    <Box
-                      flexShrink="0"
-                      style={{ display: "flex", padding: "5px" }}
-                    >
+                    <Box style={{ display: "flex", padding: "5px" }}>
                       {data.lastGames.map((item: any, index: any) => {
                         if (index < 5) {
                           if (item === "l") {
                             return (
                               <Box
-                                borderRadius="50%"
                                 backgroundColor="red"
+                                flexShrink="0"
+                                borderRadius="50%"
                                 color="white"
                                 padding="10px"
                                 textAlign="center"
-                                textDecoration="none"
-                                display="inline-block"
+                                // textDecoration="none"
+                                // display="inline-block"
                                 fontSize="10px"
                                 margin="4px 2px"
                                 cursor="pointer"
@@ -164,13 +162,14 @@ const Ui = () => {
                           } else if (item === "d") {
                             return (
                               <Box
-                                borderRadius="50%"
                                 backgroundColor="grey"
+                                flexShrink="0"
+                                borderRadius="50%"
                                 color="white"
                                 padding="10px"
                                 textAlign="center"
-                                textDecoration="none"
-                                display="inline-block"
+                                // textDecoration="none"
+                                // display="inline-block"
                                 fontSize="10px"
                                 margin="4px 2px"
                                 cursor="pointer"
@@ -181,18 +180,18 @@ const Ui = () => {
                           } else {
                             return (
                               <Box
-                                borderRadius="50%"
                                 backgroundColor="#32cd32"
+                                flexShrink="0"
+                                borderRadius="50%"
                                 color="white"
                                 padding="10px"
                                 textAlign="center"
-                                textDecoration="none"
-                                display="inline-block"
+                                // textDecoration="none"
+                                // display="inline-block"
                                 fontSize="10px"
                                 margin="4px 2px"
                                 cursor="pointer"
                               >
-                                {" "}
                                 w
                               </Box>
                             );
