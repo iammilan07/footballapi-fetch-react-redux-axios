@@ -213,7 +213,13 @@ const Ui = () => {
 
                       <ModalBody>Games Played: {newData?.games}</ModalBody>
                       <ModalBody>Wins: {newData?.wins}</ModalBody>
-                      <ModalBody>loose: {newData?.lose}</ModalBody>
+                      <ModalBody>lose: {newData?.lose}</ModalBody>
+                      <ModalBody>
+                        Draw: {newData?.games - newData?.wins - newData.lose}
+                      </ModalBody>
+                      <ModalBody>
+                        Total Goal Scored: {newData?.goalAgainst}
+                      </ModalBody>
                       <ModalFooter>
                         <Button onClick={onClose}>Close</Button>
                       </ModalFooter>
