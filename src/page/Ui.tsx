@@ -63,7 +63,7 @@ const Ui = () => {
         </Center>
       )}
       {!loading && reformedData?.length > 0 && (
-        <Table className="table" variant="striped" colorScheme="gray">
+        <Table className="table" variant="striped" colorScheme="">
           <Thead className="tableRowHeader">
             <Tr>
               <Th className="tableHeader">Position</Th>
@@ -83,7 +83,7 @@ const Ui = () => {
             {reformedData.map((data: any, index: any) => (
               <Tr
                 key={index}
-                className="tableRowIems"
+                // className="tableRowIems"
                 onClick={() => handleTeam(data)}
                 // onClick={() => handleTeam1(index)}
               >

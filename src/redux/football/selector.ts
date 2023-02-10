@@ -6,8 +6,9 @@ export const selectLoading = (state: RootState) => state.footballDataList.loadin
 
 
 export const selectMappedList = (state: RootState) => {
+
     const data: any = state.footballDataList.footballData;
-    debugger
+
     const { matches, name } = data;
     const info: any = {};
     if (matches && matches.length > 0) {
@@ -72,7 +73,7 @@ export const selectMappedList = (state: RootState) => {
     })
 
     arrayinfo.sort((a: any, b: any) => {
-        const gda = a.goalAgainst - a.goalConcede; //goaldiiferense
+        const gda = a.goalAgainst - a.goalConcede;
         const gdb = b.goalAgainst - b.goalConcede;
         const scorea = (a.wins * 3) + a.games - a.wins - a.lose
         const scoreb = (b.wins * 3) + b.games - b.wins - b.lose
