@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchFootballData,
+  selectFootballList,
   selectLoading,
   selectMappedList,
 } from "../redux/football";
-import "../components/table.css";
+
 import {
   Modal,
   ModalOverlay,
@@ -48,9 +49,10 @@ const Ui = () => {
   //   setNewData(data);
 
   // };
+
   return (
     <>
-      {/* <pre>{JSON.stringify(reformedData, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(data1, null, 2)}</pre> */}
       {loading && (
         <Center>
           <Spinner
@@ -63,84 +65,166 @@ const Ui = () => {
         </Center>
       )}
       {!loading && reformedData?.length > 0 && (
-        <Table className="table" variant="striped" colorScheme="ed">
-          <Thead className="tableRowHeader">
-            <Tr>
-              <Th className="tableHeader">Position</Th>
-              <Th className="tableHeader">Club Name</Th>
-              <Th className="tableHeader">Played</Th>
-              <Th className="tableHeader">Win</Th>
-              <Th className="tableHeader">Draw</Th>
-              <Th className="tableHeader">Loss</Th>
-              <Th className="tableHeader">Goal Scored</Th>
-              <Th className="tableHeader">Goal Concede</Th>
-              <Th className="tableHeader">GD</Th>
-              <Th className="tableHeader">Points</Th>
-              <Th className="tableHeader">Forms</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {reformedData.map((data: any, index: any) => (
-              <Tr
-                key={index}
-                // className="tableRowIems"
-                onClick={() => handleTeam(data)}
-                // onClick={() => handleTeam1(index)}
-              >
-                <Td className="tableCell">{index + 1}</Td>
-                <Td className="tableCell">{data.name}</Td>
-                <Td className="tableCell">{data.games}</Td>
-                <Td className="tableCell">{data.wins}</Td>
-                <Td className="tableCell">
-                  {data.games - data.wins - data.lose}
-                </Td>
-                <Td className="tableCell">{data.lose}</Td>
-                <Td className="tableCell">{data.goalAgainst}</Td>
-                <Td className="tableCell">{data.goalConcede}</Td>
-                <Td className="tableCell">
-                  {data.goalAgainst - data.goalConcede}
-                </Td>
-                <Td className="tableCell">
-                  {data.wins * 3 + data.games - data.wins - data.lose}
-                </Td>
-                <Td className="tableCell">
-                  <Box style={{ display: "flex", padding: "5px" }}>
-                    {data.lastGames.map((item: any, index: any) => {
-                      if (index < 5) {
-                        if (item === "l") {
-                          return <Box className="lossButton"> L</Box>;
-                        } else if (item === "d") {
-                          return <Box className="drawButton"> D</Box>;
-                        } else {
-                          return <Box className="winButton"> w</Box>;
-                        }
-                      }
-                    })}
-                  </Box>
-                </Td>
-                <Modal
-                  blockScrollOnMount={false}
-                  onClose={onClose}
-                  isOpen={isOpen}
-                  isCentered
-                >
-                  <ModalOverlay />
-                  <ModalContent>
-                    <ModalHeader>{newData?.name}</ModalHeader>
-                    <ModalCloseButton />
-
-                    <ModalBody>Games Played: {newData?.games}</ModalBody>
-                    <ModalBody>Wins: {newData?.wins}</ModalBody>
-                    <ModalBody>loose: {newData?.lose}</ModalBody>
-                    <ModalFooter>
-                      <Button onClick={onClose}>Close</Button>
-                    </ModalFooter>
-                  </ModalContent>
-                </Modal>
+        <Box alignItems="center" justifyContent="center">
+          <Table
+            margin="0 auto"
+            maxWidth="1200px"
+            padding="0 15px"
+            variant="striped"
+            colorScheme="pink"
+          >
+            <Thead className="tableRowHeader">
+              <Tr background="#37003c" color="#fff" textAlign="left">
+                <Th color="white" className="tableHeader">
+                  Position
+                </Th>
+                <Th color="white" className="tableHeader">
+                  Club Name
+                </Th>
+                <Th color="white" className="tableHeader">
+                  Played
+                </Th>
+                <Th color="white" className="tableHeader">
+                  Win
+                </Th>
+                <Th color="white" className="tableHeader">
+                  Draw
+                </Th>
+                <Th color="white" className="tableHeader">
+                  Loss
+                </Th>
+                <Th color="white" className="tableHeader">
+                  Goal Scored
+                </Th>
+                <Th color="white" className="tableHeader">
+                  Goal Concede
+                </Th>
+                <Th color="white" className="tableHeader">
+                  GD
+                </Th>
+                <Th color="white" className="tableHeader">
+                  Points
+                </Th>
+                <Th color="white" className="tableHeader">
+                  Forms
+                </Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
+            </Thead>
+            <Tbody className="body">
+              {reformedData.map((data: any, index: any) => (
+                <Tr
+                  fontWeight="500"
+                  borderBottom="1px solid #ddd"
+                  // transition=".2s ease"
+                  key={index}
+                  className="tableRowIems"
+                  onClick={() => handleTeam(data)}
+                  // onClick={() => handleTeam1(index)}
+                >
+                  <Td className="tableCell">{index + 1}</Td>
+                  <Td className="tableCell">{data.name}</Td>
+                  <Td className="tableCell">{data.games}</Td>
+                  <Td className="tableCell">{data.wins}</Td>
+                  <Td className="tableCell">
+                    {data.games - data.wins - data.lose}
+                  </Td>
+                  <Td className="tableCell">{data.lose}</Td>
+                  <Td className="tableCell">{data.goalAgainst}</Td>
+                  <Td className="tableCell">{data.goalConcede}</Td>
+                  <Td className="tableCell">
+                    {data.goalAgainst - data.goalConcede}
+                  </Td>
+                  <Td className="tableCell">
+                    {data.wins * 3 + data.games - data.wins - data.lose}
+                  </Td>
+                  <Td className="tableCell">
+                    <Box
+                      flexShrink="0"
+                      style={{ display: "flex", padding: "5px" }}
+                    >
+                      {data.lastGames.map((item: any, index: any) => {
+                        if (index < 5) {
+                          if (item === "l") {
+                            return (
+                              <Box
+                                borderRadius="50%"
+                                backgroundColor="red"
+                                color="white"
+                                padding="10px"
+                                textAlign="center"
+                                textDecoration="none"
+                                display="inline-block"
+                                fontSize="10px"
+                                margin="4px 2px"
+                                cursor="pointer"
+                              >
+                                L
+                              </Box>
+                            );
+                          } else if (item === "d") {
+                            return (
+                              <Box
+                                borderRadius="50%"
+                                backgroundColor="grey"
+                                color="white"
+                                padding="10px"
+                                textAlign="center"
+                                textDecoration="none"
+                                display="inline-block"
+                                fontSize="10px"
+                                margin="4px 2px"
+                                cursor="pointer"
+                              >
+                                D
+                              </Box>
+                            );
+                          } else {
+                            return (
+                              <Box
+                                borderRadius="50%"
+                                backgroundColor="#32cd32"
+                                color="white"
+                                padding="10px"
+                                textAlign="center"
+                                textDecoration="none"
+                                display="inline-block"
+                                fontSize="10px"
+                                margin="4px 2px"
+                                cursor="pointer"
+                              >
+                                {" "}
+                                w
+                              </Box>
+                            );
+                          }
+                        }
+                      })}
+                    </Box>
+                  </Td>
+                  <Modal
+                    blockScrollOnMount={false}
+                    onClose={onClose}
+                    isOpen={isOpen}
+                    isCentered
+                  >
+                    <ModalOverlay />
+                    <ModalContent>
+                      <ModalHeader>{newData?.name}</ModalHeader>
+                      <ModalCloseButton />
+
+                      <ModalBody>Games Played: {newData?.games}</ModalBody>
+                      <ModalBody>Wins: {newData?.wins}</ModalBody>
+                      <ModalBody>loose: {newData?.lose}</ModalBody>
+                      <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                      </ModalFooter>
+                    </ModalContent>
+                  </Modal>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </Box>
       )}
       {!loading && reformedData?.length === 0 && <p>noData</p>}
     </>
