@@ -12,8 +12,6 @@ const Header = () => {
       <Image
         height="auto"
         width="100px"
-        // borderRadius="full"
-        // boxSize="150px"
         src="./img/download.png"
         alt="Premier League Logo"
       />
