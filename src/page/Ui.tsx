@@ -63,7 +63,7 @@ const Ui = () => {
         </Center>
       )}
       {!loading && reformedData?.length > 0 && (
-        <Table className="table" variant="striped" colorScheme="">
+        <Table className="table" variant="striped" colorScheme="ed">
           <Thead className="tableRowHeader">
             <Tr>
               <Th className="tableHeader">Position</Th>
