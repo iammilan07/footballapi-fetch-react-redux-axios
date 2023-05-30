@@ -9,10 +9,10 @@ export const selectMappedList = (state: RootState) => {
 
     const data: any = state.footballDataList.footballData;
 
-    const { matches, name } = data;
+    const { matches } = data;
     const info: any = {};
     if (matches && matches.length > 0) {
-        matches.map((item: any) => {
+        matches.forEach((item: any) => {
             const { team1, team2, score } = item;
             if (!info[team1]) {
                 info[team1] = {

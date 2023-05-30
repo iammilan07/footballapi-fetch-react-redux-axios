@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   fetchFootballData,
-  selectFootballList,
   selectLoading,
   selectMappedList,
 } from "../redux/football";
@@ -17,15 +16,16 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
-  Spinner,
   Table,
   Thead,
   Tr,
   Th,
   Tbody,
   Td,
-  Box,
+  
   Center,
+  Box,
+  Spinner,
 } from "@chakra-ui/react";
 
 const Ui = () => {
@@ -36,7 +36,7 @@ const Ui = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchFootballData());
-  }, []);
+  }, [dispatch]);
   const handleTeam = (data: any) => {
     onOpen();
     setNewData(data);
@@ -139,7 +139,7 @@ const Ui = () => {
                   </Td>
                   <Td className="tableCell">
                     <Box style={{ display: "flex", padding: "5px" }}>
-                      {data.lastGames.map((item: any, index: any) => {
+                      {data.lastGames.forEach((item: any, index: any) => {
                         if (index < 5) {
                           if (item === "l") {
                             return (
@@ -234,6 +234,6 @@ const Ui = () => {
       {!loading && reformedData?.length === 0 && <p>noData</p>}
     </>
   );
-};
+}
 
 export default Ui;
