@@ -52,7 +52,7 @@ const Ui = () => {
 
   return (
     <>
-      {/* <pre>{JSON.stringify(data1, null, 2)}</pre> */}
+      <pre>{JSON.stringify(reformedData, null, 2)}</pre>
       {loading && (
         <Center>
           <Spinner
